@@ -313,15 +313,15 @@ describe("desktop pet window mode", () => {
     );
   });
 
-  it("pins the app to the light theme so inactive traffic-light buttons stay visible on the light background", () => {
+  it("makes the app follow the system theme so the chrome stays in sync with the UI palette", () => {
     const source = readFileSync(mainSourcePath, "utf8");
 
-    expect(source).toContain("function forceLightWindowChrome(): void {");
-    const chromeBody = source.slice(source.indexOf("function forceLightWindowChrome(): void {"));
+    expect(source).toContain("function followSystemWindowChrome(): void {");
+    const chromeBody = source.slice(source.indexOf("function followSystemWindowChrome(): void {"));
     const scopedBody = chromeBody.slice(0, chromeBody.indexOf("\n}\n"));
-    expect(scopedBody).toContain('nativeTheme.themeSource = "light";');
+    expect(scopedBody).toContain('nativeTheme.themeSource = "system";');
     // Applied during boot before any window is created.
-    expect(source).toContain("initLogger();\n    forceLightWindowChrome();");
+    expect(source).toContain("initLogger();\n    followSystemWindowChrome();");
     expect(source).toContain("nativeTheme");
   });
 
