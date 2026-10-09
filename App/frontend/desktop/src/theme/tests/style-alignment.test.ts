@@ -49,9 +49,9 @@ describe("prototype style alignment", () => {
     expect(globalCss).not.toContain("*::-webkit-scrollbar-thumb");
   });
 
-  it("does not expose dark theme token overrides", () => {
-    expect(tokenCss).not.toContain('data-theme="dark"');
-    expect(tokenCss).not.toContain("color-scheme: dark");
+  it("exposes dark theme token overrides for the system color scheme", () => {
+    expect(tokenCss).toContain('color-scheme: dark');
+    expect(tokenCss).toMatch(/\[data-theme="dark"\]/);
   });
 
   it("keeps prototype global interaction and mascot animations available", () => {

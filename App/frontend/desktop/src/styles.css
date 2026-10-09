@@ -9796,7 +9796,7 @@ body.memmy-platform-windows:not(.memmy-window-fullscreen) .memmy-notification-st
 .model-connection-modal .auth-code-form-input,
 .model-connection-select .select-control__button {
   min-height: 46px;
-  border-color: color-mix(in srgb, var(--color-border-stone) 70%, white);
+  border-color: color-mix(in srgb, var(--color-border-stone) 70%, var(--color-mix-soft, white));
   background: color-mix(in srgb, var(--color-canvas-oat) 30%, transparent);
   font-size: 14px;
   font-weight: 400;
@@ -9812,7 +9812,7 @@ body.memmy-platform-windows:not(.memmy-window-fullscreen) .memmy-notification-st
 .model-capability-select .select-control__button {
   min-height: 36px;
   height: 36px;
-  border-color: color-mix(in srgb, var(--color-border-stone) 70%, white);
+  border-color: color-mix(in srgb, var(--color-border-stone) 70%, var(--color-mix-soft, white));
   background: color-mix(in srgb, var(--color-canvas-oat) 30%, transparent);
   font-size: 12px;
   font-weight: 400;
@@ -10718,7 +10718,7 @@ body.memmy-platform-windows :is(
 }
 
 .memory-plugin-conflict-modal__button--secondary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-canvas-oat) 46%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 46%, var(--color-mix-soft, white));
 }
 
 .memory-plugin-conflict-modal__button--primary {
@@ -11100,7 +11100,7 @@ body.memmy-platform-windows :is(
   justify-content: center;
   margin: 0 auto;
   border-radius: 999px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--color-canvas-oat) 80%, white), var(--color-canvas-oat));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-canvas-oat) 80%, var(--color-mix-soft, white)), var(--color-canvas-oat));
 }
 
 .confirm-dialog__message {
@@ -11183,12 +11183,12 @@ body.memmy-platform-windows :is(
 }
 
 .confirm-dialog--titled .confirm-dialog__footer .button-primary {
-  background: color-mix(in srgb, var(--color-action-sky) 14%, white);
+  background: color-mix(in srgb, var(--color-action-sky) 14%, var(--color-mix-soft, white));
   color: var(--color-action-sky);
 }
 
 .confirm-dialog--titled .confirm-dialog__footer .button-primary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-action-sky) 22%, white);
+  background: color-mix(in srgb, var(--color-action-sky) 22%, var(--color-mix-soft, white));
   color: var(--color-action-sky-hover);
 }
 
@@ -11482,7 +11482,7 @@ body.memmy-platform-windows :is(
 
 .search-palette-item:hover,
 .search-palette-item--active {
-  background: color-mix(in srgb, var(--color-canvas-oat) 72%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 72%, var(--color-mix-soft, white));
 }
 
 .search-palette-item-title {
@@ -13097,7 +13097,7 @@ body.memmy-platform-windows :is(
 
 /* Auth code form input styles. */
 .auth-code-form-input {
-  border-color: color-mix(in srgb, var(--color-border-stone) 70%, white);
+  border-color: color-mix(in srgb, var(--color-border-stone) 70%, var(--color-mix-soft, white));
 }
 
 .auth-code-form-input::placeholder {
@@ -13188,8 +13188,8 @@ body.memmy-platform-windows :is(
 
 /* Optional invite field: muted so it reads as secondary / non-required. */
 .auth-code-form-input--optional {
-  border-color: color-mix(in srgb, var(--color-border-stone) 42%, white);
-  background: color-mix(in srgb, var(--color-canvas-oat) 22%, white);
+  border-color: color-mix(in srgb, var(--color-border-stone) 42%, var(--color-mix-soft, white));
+  background: color-mix(in srgb, var(--color-canvas-oat) 22%, var(--color-mix-soft, white));
   color: color-mix(in srgb, var(--color-text-ink) 68%, transparent);
 }
 
@@ -13390,7 +13390,7 @@ body.memmy-platform-windows :is(
   border: 1px solid color-mix(in srgb, var(--color-border-stone) 42%, transparent);
   border-radius: var(--radius-tag);
   padding: 0 8px;
-  background: color-mix(in srgb, var(--color-canvas-oat) 74%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 74%, var(--color-mix-soft, white));
   color: color-mix(in srgb, var(--color-text-ink) 55%, transparent);
   font-size: 10px;
   font-weight: 700;
@@ -13498,7 +13498,7 @@ body.memmy-platform-windows :is(
 
 .settings-secondary-button:hover {
   border-color: color-mix(in srgb, var(--color-border-stone) 65%, transparent);
-  background: color-mix(in srgb, var(--color-canvas-oat) 48%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 48%, var(--color-mix-soft, white));
   color: color-mix(in srgb, var(--color-text-ink) 78%, transparent);
 }
 
@@ -13516,7 +13516,7 @@ body.memmy-platform-windows :is(
   overflow: hidden;
   height: 10px;
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-canvas-oat) 66%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 66%, var(--color-mix-soft, white));
 }
 
 .settings-progress-fill {
@@ -13546,7 +13546,7 @@ body.memmy-platform-windows :is(
 }
 
 .settings-status-badge--muted {
-  background: color-mix(in srgb, var(--color-canvas-oat) 62%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 62%, var(--color-mix-soft, white));
   color: color-mix(in srgb, var(--color-text-ink) 56%, transparent);
 }
 
@@ -13627,7 +13627,7 @@ body.memmy-platform-windows :is(
   flex: 0 0 auto;
   border: 1px solid color-mix(in srgb, var(--color-border-stone) 68%, transparent);
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-canvas-oat) 62%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 62%, var(--color-mix-soft, white));
   transition:
     background var(--duration-fast),
     border-color var(--duration-fast);
@@ -13723,7 +13723,7 @@ body.memmy-platform-windows :is(
 
 .history-dag-flow-scope .history-dag-node-status {
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-canvas-oat) 72%, white);
+  background: color-mix(in srgb, var(--color-canvas-oat) 72%, var(--color-mix-soft, white));
   padding: 4px 6px;
 }
 
@@ -14165,7 +14165,7 @@ body.memmy-platform-windows :is(
   --ch-title: var(--color-text-ink);
   --ch-prose: color-mix(in srgb, var(--color-text-ink) 66%, transparent);
   --ch-muted: color-mix(in srgb, var(--color-text-ink) 42%, transparent);
-  --ch-rail: color-mix(in srgb, var(--color-border-stone) 80%, white);
+  --ch-rail: color-mix(in srgb, var(--color-border-stone) 80%, var(--color-mix-soft, white));
   --ch-dot: color-mix(in srgb, var(--color-action-sky) 62%, var(--color-border-stone));
   --ch-chip: var(--color-canvas-oat);
   --ch-accent: var(--color-action-sky-hover);
@@ -15235,11 +15235,11 @@ body.memmy-platform-windows :is(
   font-size: 13px;
   font-weight: 500;
   box-shadow: none;
-  background: color-mix(in srgb, var(--color-action-sky) 14%, white);
+  background: color-mix(in srgb, var(--color-action-sky) 14%, var(--color-mix-soft, white));
   color: var(--color-action-sky);
 }
 .ch__permission-dialog .ch__permission-open:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-action-sky) 22%, white);
+  background: color-mix(in srgb, var(--color-action-sky) 22%, var(--color-mix-soft, white));
   color: var(--color-action-sky-hover);
 }
 
@@ -15378,3 +15378,123 @@ body.memmy-platform-windows :is(
 .memmy-browser-history-entry__main span { color: var(--color-text-secondary, #777); font-size: 12px; }
 .memmy-browser-history-entry__source { flex: none; color: var(--color-text-secondary, #777); font-size: 12px; line-height: 1.4; white-space: nowrap; }
 .memmy-browser-history-entry__delete { flex: none; }
+
+/**
+ * Dark theme component adjustments ([memmy-fork] system dark mode).
+ *
+ * styles.css is otherwise token-driven (tokens.css carries the [data-theme="dark"] palette);
+ * these rules cover the remaining hardcoded light colors: attachment file-type tiles, the
+ * embedded neutral utility ramp, and a few component accents.
+ */
+[data-theme="dark"] .agent-attachment-card__file-tile--pdf {
+  background: #3a2328;
+  color: #ff8fa0;
+}
+
+[data-theme="dark"] .agent-attachment-card__file-tile--docx {
+  background: #1e2f42;
+  color: #7db4ea;
+}
+
+[data-theme="dark"] .agent-attachment-card__file-tile--xlsx {
+  background: #17342a;
+  color: #5fd0a0;
+}
+
+[data-theme="dark"] .agent-attachment-card__file-tile--pptx {
+  background: #3a2c18;
+  color: #f0b26a;
+}
+
+[data-theme="dark"] .agent-attachment-card__file-tile--file {
+  background: #223230;
+  color: #9fb5b0;
+}
+
+[data-theme="dark"] input[type="checkbox"].check-sky {
+  background: var(--color-background-paper);
+}
+
+[data-theme="dark"] .border-stone-200 {
+  border-color: #3a4a46;
+}
+
+[data-theme="dark"] .bg-stone-50 {
+  background-color: #202e2b;
+}
+
+[data-theme="dark"] .hover\:bg-stone-50:hover {
+  background-color: #202e2b;
+}
+
+[data-theme="dark"] .hover\:bg-stone-100:hover {
+  background-color: #273633;
+}
+
+[data-theme="dark"] .text-stone-400 {
+  color: #7f8f8a;
+}
+
+[data-theme="dark"] .text-stone-500 {
+  color: #93a29d;
+}
+
+[data-theme="dark"] .text-stone-600 {
+  color: #aab7b2;
+}
+
+[data-theme="dark"] .text-stone-700 {
+  color: #c4ceca;
+}
+
+[data-theme="dark"] .text-stone-900 {
+  color: #e7efec;
+}
+
+[data-theme="dark"] .hover\:text-stone-900:hover {
+  color: #e7efec;
+}
+
+[data-theme="dark"] .border-amber-200 {
+  border-color: #4d3f1c;
+}
+
+[data-theme="dark"] .bg-amber-50 {
+  background-color: #2e2817;
+}
+
+[data-theme="dark"] .text-amber-800 {
+  color: #f0cf7e;
+}
+
+[data-theme="dark"] .channel-permission-note {
+  color: #f0cf7e;
+}
+
+[data-theme="dark"] .channel-permission-note__item::marker {
+  color: #e8b34a;
+}
+
+[data-theme="dark"] .text-sage-700 {
+  color: #5fd08d;
+}
+
+[data-theme="dark"] .border-coral-200 {
+  border-color: #4d2626;
+}
+
+[data-theme="dark"] .bg-coral-50 {
+  background-color: #32201f;
+}
+
+[data-theme="dark"] .text-coral-700 {
+  color: #ff9c9c;
+}
+
+[data-theme="dark"] .hover\:bg-coral-100:hover {
+  background-color: #3d2726;
+}
+
+[data-theme="dark"] .history-dag-flow-scope .history-dag-node-card[data-status="blocked"] .history-dag-node-status {
+  color: #e0b45c;
+}

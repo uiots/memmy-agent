@@ -29,6 +29,8 @@
     color-mix(in srgb, var(--color-background-paper) 96%, white)
   );
   --color-content-bg: var(--color-content-base);
+  /* Lightening base for color-mix() calls in styles.css; flips dark in the dark theme. */
+  --color-mix-soft: white;
   /* Color content glow neon color token. */
   --color-content-glow-neon: rgb(98 255 176 / 0.008);
   --color-content-glow-ember: rgb(245 158 107 / 0.006);
@@ -166,4 +168,48 @@
   --file-icon-folder-edge: #2e89bd;
   --file-icon-folder-highlight: rgba(255, 255, 255, 0.72);
   --file-icon-folder-paper: #f7f4ec;
+}
+
+/**
+ * Dark theme token overrides ([memmy-fork] system dark mode).
+ *
+ * Only the base palette plus the derived tokens that hardcode `white`/light mix targets need
+ * explicit overrides; every other derived token re-resolves its var() references on :root, so
+ * they cascade from the base colors above.
+ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-canvas-oat: #141f1d;
+  --color-background-paper: #1b2826;
+  --color-text-ink: #e7efec;
+  --color-border-stone: #2c423d;
+  --color-outline-ebony: #e7efec;
+  --color-action-sky: #5cbfae;
+  --color-action-sky-hover: #79d2c3;
+  --color-footer-slate: #233833;
+  --color-accent-pink: #402e33;
+  --color-accent-lavender: #2e3048;
+  --color-accent-mint: #1e3a30;
+  --color-accent-peach: #3e2f1f;
+  --color-accent-lemon: #383520;
+  --color-status-success-soft: #16332b;
+  --color-status-error-soft: #3f272c;
+  --color-role-assistant-soft: #2a3052;
+
+  /* Derived tokens whose light definitions mix with literal white. */
+  --color-mix-soft: #0d1514;
+  --color-sidebar-bg: color-mix(
+    in srgb,
+    var(--color-icon-ember) 3%,
+    color-mix(in srgb, var(--color-accent-neon-mint) 2%, var(--color-canvas-oat))
+  );
+  --color-content-base: color-mix(in srgb, var(--color-icon-ember) 0.6%, var(--color-background-paper));
+  --color-nav-active-bg: color-mix(in srgb, var(--color-action-sky) 22%, var(--color-canvas-oat));
+  --color-surface-muted: color-mix(in srgb, var(--color-canvas-oat) 60%, var(--color-background-paper));
+
+  /* Heavier shadows so elevation still reads on dark surfaces. */
+  --shadow-card: 0 16px 38px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-popover: 0 18px 52px rgba(0, 0, 0, 0.55);
 }
