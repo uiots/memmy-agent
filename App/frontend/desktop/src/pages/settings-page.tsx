@@ -1,7 +1,7 @@
 /** Settings page for account, model, token usage, and desktop preferences. */
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type Dispatch, type ReactNode } from "react";
 import { Brain, Palette, Rocket, Settings2, Shield, User, Zap, ArrowRight, Bell, ExternalLink, FolderOpen, Gift, Gauge, Info, KeyRound, LogOut, Wrench, Eye, EyeOff, ChevronDown, ChevronUp, Database, Loader2, CheckCircle2, XCircle, Check, AlertTriangle, Mic, Image as ImageIcon, Copy, Users} from "lucide-react";
-import type { AccountInvitationView, AppSettingsDto, ByokTokenUsageByKind, ByokTokenUsageByModel, ByokTokenUsageCapability, ByokTokenUsageKind, ByokTokenUsageSummary, Language, MemoryTokenBudgetDto, ModelConfigView, PrivacySettingsDto, TokenQuotaEligibility, TokenSceneUsageDto, TokenUsageDto } from "@memmy/local-api-contracts";
+import type { AccountInvitationView, AppSettingsDto, ByokTokenUsageByKind, ByokTokenUsageByModel, ByokTokenUsageCapability, ByokTokenUsageKind, ByokTokenUsageSummary, Language, MemoryTokenBudgetDto, ModelConfigView, PrivacySettingsDto, Theme, TokenQuotaEligibility, TokenSceneUsageDto, TokenUsageDto } from "@memmy/local-api-contracts";
 import { useApiClients } from "../app/providers.js";
 import { copyInvitationCode } from "../app/invitation-analytics.js";
 import { resolveGiftTokenUsage } from "../app/routes.js";
@@ -1030,6 +1030,15 @@ export function SettingsPageView(props: SettingsPageViewProps) {
   }
 
   /**
+   * Switches the interface color scheme.
+   *
+   * @param nextTheme The theme preference.
+   */
+  function handleThemeChange(nextTheme: string) {
+    persistSettings({ theme: nextTheme as Theme });
+  }
+
+  /**
    * Switches the default startup mode.
    *
    * @param nextMode The default startup mode.
@@ -1788,6 +1797,18 @@ export function SettingsPageView(props: SettingsPageViewProps) {
           hidden={activeTab !== "preferences"}
         >
         <Section icon={<Palette size={16} className="text-text-ink/60" />} title={t("settings.general")}>
+          <SelectRow
+            label={t("settings.theme")}
+            description={t("settings.theme.description")}
+            value={bootstrap?.app.theme ?? "system"}
+            onChange={handleThemeChange}
+            options={[
+              { value: "system", label: t("settings.theme.system") },
+              { value: "light", label: t("settings.theme.light") },
+              { value: "dark", label: t("settings.theme.dark") }
+            ]}
+          />
+          <Divider />
           <SelectRow
             label={t("settings.language")}
             description={t("settings.general.languageDescription")}
