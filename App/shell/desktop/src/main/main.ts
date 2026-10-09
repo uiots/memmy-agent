@@ -512,7 +512,7 @@ async function boot(): Promise<void> {
     bootStage = "initializing";
     process.env.MEMMY_APP_EDITION = resolveCurrentDesktopEdition();
     initLogger();
-    forceLightWindowChrome();
+    followSystemWindowChrome();
     await writePackagedStartupLog("boot:start");
     if (await installPreparedRequiredUpdateBeforeBoot()) {
       await writePackagedStartupLog("boot:prepared-required-update-started");
@@ -3781,6 +3781,10 @@ function resolveDownloadedUpdatePath(filePath: string): string {
  * @returns A usable manifest URL; null when it is not configured.
  */
 function resolveUpdateManifestUrl(): string | null {
+  // [memmy-fork] Auto-update disabled: this is a maintained fork build (system dark mode).
+  // Pointing at the upstream manifest would let a required update overwrite the fork with the
+  // official bundle. Re-enable deliberately after rebasing onto a newer upstream release.
+  return null;
   const url = new URL(normalizeHttpUrl(DEFAULT_UPDATE_MANIFEST_URL));
   url.searchParams.set("platformType", resolveCurrentDesktopPlatformType());
   url.searchParams.set("version", resolveDesktopAppVersion());
@@ -4377,10 +4381,10 @@ function loadMenuBarAppearanceNative(): MenuBarAppearanceNative | null {
 /**
  * Whether the menu bar itself wants a light glyph.
  *
- * The app pins `themeSource` to light, so NativeTheme reports light even when the
- * menu bar is dark. `AppleInterfaceStyle` only follows the system appearance and
- * misses a light-mode menu bar sitting on a dark wallpaper. The status button's
- * own appearance is what AppKit uses to tint the template icon.
+ * NativeTheme follows the system color scheme, but the menu bar can still differ
+ * (e.g. a light menu bar over a dark wallpaper). `AppleInterfaceStyle` alone misses
+ * that case. The status button's own appearance is what AppKit uses to tint the
+ * template icon.
  */
 function menuBarIsDark(): boolean | null {
   const appearance = loadMenuBarAppearanceNative()?.menuBarAppearance() ?? "unknown";
@@ -4512,6 +4516,7 @@ function createMainWindow(target: RendererRouteTarget | null = null): BrowserWin
   const windowsTaskbarIconPath = resolveWindowsTaskbarIconPath();
   const targetMainWindow = new BrowserWindow({
     ...fullWindowOptions,
+    backgroundColor: resolveWindowBackgroundColor(),
     ...resolveFullWindowChromeOptions(process.platform),
     ...resolveFullWindowSize(screen.getPrimaryDisplay().workArea),
     ...(windowsTaskbarIconPath ? { icon: windowsTaskbarIconPath } : {}),
@@ -5275,7 +5280,7 @@ function showMainWindow(target: RendererRouteTarget | null = null): void {
   targetMainWindow.setVisibleOnAllWorkspaces(false);
   targetMainWindow.setResizable(true);
   targetMainWindow.setMinimumSize(fullWindowOptions.minWidth, fullWindowOptions.minHeight);
-  targetMainWindow.setBackgroundColor(fullWindowOptions.backgroundColor);
+  targetMainWindow.setBackgroundColor(resolveWindowBackgroundColor());
   updateFullWindowButtonPosition(targetMainWindow);
   if (target && shouldNotifyRouteTarget) {
     deliverMainWindowRouteTarget(targetMainWindow, target);
@@ -5373,22 +5378,21 @@ function updateFullWindowButtonPosition(targetWindow: BrowserWindow): void {
 }
 
 /**
- * Pins the app to the light system theme.
+ * Makes the app follow the system color scheme.
  *
- * macOS paints the INACTIVE (blurred) hiddenInset traffic-light buttons using the color it infers for
- * the app theme. When it infers dark mode it draws them in a light color, which is invisible against
- * our light window background (#f1f8f7) — so the buttons look like they "disappear" whenever the window
- * loses focus. Forcing themeSource to "light" makes macOS draw the visible dark-gray inactive buttons.
- * The desktop UI is a fixed light theme, so this has no other visual impact.
+ * The renderer resolves `theme: "system"` from the OS `prefers-color-scheme` state, so the app
+ * chrome (traffic lights, window background) and the UI palette stay in sync. Pinning the theme
+ * source to "light" (the pre-dark-mode behavior) would keep `prefers-color-scheme` permanently
+ * light and break system dark mode.
  *
  * @returns Nothing.
  */
-function forceLightWindowChrome(): void {
+function followSystemWindowChrome(): void {
   if (process.platform !== "darwin") {
     return;
   }
 
-  nativeTheme.themeSource = "light";
+  nativeTheme.themeSource = "system";
   watchMenuBarAppearance();
 }
 
@@ -5401,6 +5405,18 @@ function watchMenuBarAppearance(): void {
   };
   nativeTheme.on("updated", refreshRecordingGlyph);
   systemPreferences.subscribeNotification("AppleInterfaceThemeChangedNotification", refreshRecordingGlyph);
+}
+
+/**
+ * Resolves the window background color for the active color scheme.
+ *
+ * Applied at window creation and when the full window re-enters its layout, so the first painted
+ * frame matches the active theme instead of flashing the light canvas in dark mode.
+ *
+ * @returns The background color matching the resolved OS color scheme.
+ */
+function resolveWindowBackgroundColor(): string {
+  return nativeTheme.shouldUseDarkColors ? "#141f1d" : "#f1f8f7";
 }
 
 /**
